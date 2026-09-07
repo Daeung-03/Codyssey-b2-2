@@ -19,6 +19,9 @@
 | 김정현 | @kimjexnghyexn | `git-branch`, `github-flow`, `python-functions` | `commit --amend` |
 | 김승우 | @stevenkim18 | `git-conflict`, `github-pr-review`, `python-errors` | `reset --soft` |
 
+트러블슈팅 4종을 3명이 나누기 때문에 대웅이 2개(`revert`, `stash`)를 맡습니다.
+`revert`는 원격에 올라간 커밋을 되돌리는 거라 저장소 주인이 하는 게 안전합니다.
+
 ---
 
 ## 2. 폴더 구조
@@ -86,52 +89,55 @@ approve 1명 받고 머지, 머지하면 브랜치 삭제.
 
 ## 5. 3일 계획
 
-### Day 0 — 세팅 (대웅, 20분)
+### Day 0 — 세팅 (대웅)
 
-GitHub 웹에서 클릭으로 다 됩니다.
-
-1. Settings → Collaborators → `kimjexnghyexn`, `stevenkim18` 초대
-2. 이 스캐폴딩 파일들을 `main`에 push (보호 설정 **전에** 한 번만)
-3. Settings → General → Pull Requests: `Allow merge commits`만 켜고 Squash / Rebase 끄기, `Automatically delete head branches` 켜기
-4. Settings → Branches → Add branch protection rule
+1. 협업 규칙 작성 완료 — `docs/CONTRIBUTING.md`, 이슈·PR 양식, 기록 문서 템플릿
+2. 스캐폴딩 파일들을 `main`에 push (브랜치 보호 설정 **전에** 한 번만)
+3. Settings → Collaborators → `kimjexnghyexn`, `stevenkim18` 초대
+4. Settings → General → Pull Requests: `Allow merge commits`만 켜고 Squash / Rebase 끄기, `Automatically delete head branches` 켜기
+5. Settings → Branches → Add branch protection rule
    - Branch name pattern: `main`
    - ☑ Require a pull request before merging → Require approvals: **1**
    - ☑ Require conversation resolution before merging
    - ☑ Do not allow bypassing the above settings ← 이걸 켜면 주인도 main에 직접 push 못 함
-5. 팀원 전원 `git clone` 후 CONTRIBUTING.md 같이 읽기 (15분)
+6. 팀원 전원 `git clone` 후 `docs/CONTRIBUTING.md` 읽기
 
-### Day 1 — 규칙 확정
+> 브랜치 보호는 **팀원이 초대를 수락한 다음에** 켜세요. GitHub은 본인 PR을 본인이 approve할 수 없어서,
+> 혼자 있는 상태로 보호를 켜면 첫 PR을 머지할 수 없습니다.
 
-목표: **각자 PR 1개 머지 + 남의 PR에 리뷰 1개**
+### Day 1 — 워크플로우 익히기 (Git 노트 3편)
 
-| 담당 | 브랜치 | 할 일 |
+목표: **각자 PR 1개 머지 + 남의 PR에 리뷰 1개.** 규칙대로 한 바퀴 돌려보는 날입니다.
+
+| 담당 | 노트 | 브랜치 |
 |---|---|---|
-| 대웅 | `docs/daeung-03-plan-update` | 킥오프에서 나온 수정 의견을 README 계획에 반영 |
-| 김정현 | `docs/kimjexnghyexn-contributing-commit` | CONTRIBUTING의 브랜치·커밋 규칙 확정 |
-| 김승우 | `docs/stevenkim18-contributing-pr` | CONTRIBUTING의 PR·리뷰·충돌 대응 규칙 확정 |
+| 대웅 | `notes/git-basics.md` | `docs/daeung-03-git-basics` |
+| 김정현 | `notes/git-branch.md` | `docs/kimjexnghyexn-git-branch` |
+| 김승우 | `notes/git-conflict.md` | `docs/stevenkim18-git-conflict` |
 
-정현과 승우는 같은 파일의 다른 부분을 고칩니다. 나중에 push하는 사람은 `git pull origin main` 먼저 하세요.
+- [ ] 이슈 → 브랜치 → 커밋 → PR → 리뷰 → 머지 한 바퀴
+- [ ] 각자 본인 PR에서 리뷰 반영 커밋 1개 이상
+- [ ] 규칙 중에 이상한 게 있으면 CONTRIBUTING 수정 PR로 제안
 
-### Day 2 — Git/GitHub 노트 6개 + 충돌 #1
+### Day 2 — GitHub 노트 + 되돌리기 노트 + 충돌 #1
 
-| 담당 | 노트 |
-|---|---|
-| 대웅 | `notes/git-basics.md`, `notes/git-undo.md` |
-| 김정현 | `notes/git-branch.md`, `notes/github-flow.md` |
-| 김승우 | `notes/git-conflict.md`, `notes/github-pr-review.md` |
+| 담당 | 노트 | 브랜치 |
+|---|---|---|
+| 대웅 | `notes/git-undo.md` | `docs/daeung-03-git-undo` |
+| 김정현 | `notes/github-flow.md` | `docs/kimjexnghyexn-github-flow` |
+| 김승우 | `notes/github-pr-review.md` | `docs/stevenkim18-pr-review` |
 
-- [ ] 노트 6개 머지, 목차에 6줄 등록
-- [ ] **충돌 #1 실행하고 기록** (아래 6번)
-- [ ] 각자 본인 PR에서 리뷰 받고 반영 커밋 1개 이상
+- [ ] 노트 3개 머지 (목차 누적 6줄)
+- [ ] **충돌 #1 실행하고 기록** — 정현·승우가 같은 main에서 시작 (아래 6번)
 - [ ] Day 2 끝날 때 `notes/python-functions.md`는 아직 main에 없어야 함 (Day 3 충돌용)
 
-### Day 3 — Python 노트 3개 + 충돌 #2 + 트러블슈팅 + 마감
+### Day 3 — Python 노트 + 충돌 #2 + 트러블슈팅 + 마감
 
 | 순서 | 할 일 | 담당 |
 |---|---|---|
 | 1 | `notes/python-functions.md` 먼저 머지 | 김정현 |
 | 2 | `notes/python-basics.md`, `notes/python-errors.md` 머지 | 대웅, 김승우 |
-| 3 | **충돌 #2 실행하고 기록** | 대웅 ↔ 김정현 |
+| 3 | **충돌 #2 실행하고 기록** (1번 머지 후에) | 대웅 ↔ 김정현 |
 | 4 | 트러블슈팅 4종 실습 + 기록 | amend=정현 / reset=승우 / revert·stash=대웅 |
 | 5 | `git log --oneline --graph --all` → `docs/git-history.md` | 대웅 |
 | 6 | `SUBMISSION.md` 링크 채우기 | 각자 본인 것 |
@@ -152,18 +158,18 @@ git checkout main
 git pull origin main
 
 # 김정현 (먼저 머지)
-git checkout -b docs/kimjexnghyexn-git-branch
-# notes/git-branch.md 작성 + notes/README.md 표 맨 아래에 한 줄 추가
+git checkout -b docs/kimjexnghyexn-github-flow
+# notes/github-flow.md 작성 + notes/README.md 표 맨 아래에 한 줄 추가
 git add .
-git commit -m "docs: 브랜치 포인터 노트 추가"
-git push origin docs/kimjexnghyexn-git-branch   # PR 올려서 머지
+git commit -m "docs: GitHub Flow 노트 추가"
+git push origin docs/kimjexnghyexn-github-flow   # PR 올려서 머지
 
 # 김승우 (정현 머지된 뒤에 push → PR에 conflict 표시됨)
-git checkout -b docs/stevenkim18-git-conflict
-# notes/git-conflict.md 작성 + notes/README.md 같은 위치에 한 줄 추가
+git checkout -b docs/stevenkim18-pr-review
+# notes/github-pr-review.md 작성 + notes/README.md 같은 위치에 한 줄 추가
 git add .
-git commit -m "docs: 충돌 마커 노트 추가"
-git push origin docs/stevenkim18-git-conflict
+git commit -m "docs: PR·코드 리뷰 노트 추가"
+git push origin docs/stevenkim18-pr-review
 
 # 승우가 자기 브랜치에서 해결
 git pull origin main          # CONFLICT: notes/README.md
@@ -171,7 +177,7 @@ git diff                      # 마커 보이는 거 복사해서 기록에 붙�
 # 두 줄 다 살리고 마커 지움
 git add notes/README.md
 git commit
-git push origin docs/stevenkim18-git-conflict
+git push origin docs/stevenkim18-pr-review
 ```
 
 기록: 김승우 (상대 김정현)
@@ -262,7 +268,7 @@ git push origin docs/kimjexnghyexn-python-functions-fix
 - [ ] 모든 PR 본문에 `Closes #이슈번호`
 - [ ] 충돌 기록 2건 이상 (비자명 1건 이상)
 - [ ] 트러블슈팅 4종 (`amend` `reset --soft` `revert` `stash`) 전부 기록
-- [ ] CONTRIBUTING.md 5개 항목 작성
+- [x] CONTRIBUTING.md 5개 항목 작성 (Day 0에 완료)
 - [ ] `docs/git-history.md`에 `git log --oneline --graph --all` 결과
 - [ ] SUBMISSION.md 링크 다 채움
 
@@ -280,7 +286,7 @@ git push origin docs/kimjexnghyexn-python-functions-fix
 ## 9. 작업 루틴 (매번 이 순서)
 
 ```bash
-# 1. GitHub 웹 Issues → New issue → 양식 선택 (작업 / 수정 요청)
+# 1. GitHub 웹 Issues → New issue → 양식 선택 (7종 중 해당하는 것)
 
 # 2. 최신 main에서 브랜치 만들기  ← 빼먹으면 쓸데없는 충돌 남
 git checkout main

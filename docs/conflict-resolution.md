@@ -20,8 +20,8 @@
 - 상대: 김정현 (@kimjexnghyexn)
 
 ### 상황
-- 내 브랜치: `docs/stevenkim18-git-conflict`
-- 상대 브랜치: `docs/kimjexnghyexn-git-branch` (main에 먼저 머지됨)
+- 내 브랜치: `docs/stevenkim18-pr-review`
+- 상대 브랜치: `docs/kimjexnghyexn-github-flow` (main에 먼저 머지됨)
 - 파일: `notes/README.md`
 - 원인: 새 노트는 목차 표 맨 아래에 한 줄 추가하는 규칙이라, 둘이 같은 main에서 시작해서 같은 위치에 각자 한 줄을 넣었다.
 
@@ -29,9 +29,9 @@
 
 ```txt
 <<<<<<< HEAD
-| git-conflict | 김승우 | ... |
+| github-pr-review | 김승우 | ... |
 =======
-| git-branch | 김정현 | ... |
+| github-flow | 김정현 | ... |
 >>>>>>> origin/main
 ```
 
@@ -52,7 +52,7 @@ git diff                    # 마커 확인
 # 마커 지우고 두 줄 다 남김
 git add notes/README.md
 git commit
-git push origin docs/stevenkim18-git-conflict
+git push origin docs/stevenkim18-pr-review
 ```
 
 ### 결과

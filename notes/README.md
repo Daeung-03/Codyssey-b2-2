@@ -9,9 +9,9 @@
 
 | 분류 | 노트 | 담당 | 예정일 |
 |---|---|---|---|
-| Git | `git-basics.md` | 대웅 | Day 2 |
-| Git | `git-branch.md` | 김정현 | Day 2 |
-| Git | `git-conflict.md` | 김승우 | Day 2 |
+| Git | `git-basics.md` | 대웅 | Day 1 |
+| Git | `git-branch.md` | 김정현 | Day 1 |
+| Git | `git-conflict.md` | 김승우 | Day 1 |
 | Git | `git-undo.md` | 대웅 | Day 2 |
 | GitHub | `github-flow.md` | 김정현 | Day 2 |
 | GitHub | `github-pr-review.md` | 김승우 | Day 2 |
