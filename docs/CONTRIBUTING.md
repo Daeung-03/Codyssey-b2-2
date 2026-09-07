@@ -88,10 +88,19 @@ push 안 한 최근 커밋 메시지는 `git commit --amend`로 고칩니다.
 
 ### 이슈
 
-- 작업은 **먼저 이슈로 만듭니다.** Issues → New issue에서 양식 선택
-  - **작업** (`.github/ISSUE_TEMPLATE/task.md`) — 노트 작성, 문서 수정, 설정
-  - **수정 요청** (`.github/ISSUE_TEMPLATE/bug.md`) — 잘못된 내용, 깨진 링크, 안 되는 예시 코드
-- 제목은 커밋과 같은 형식 (`docs: 브랜치 포인터 노트 작성`)
+- 작업은 **먼저 이슈로 만듭니다.** Issues → New issue에서 종류를 고르세요.
+
+| 양식 | 쓸 때 | 제목 프리픽스 |
+|---|---|---|
+| 📓 학습 노트 작성 | `notes/`에 노트 추가 | `docs:` |
+| 📄 문서 작업 | README·CONTRIBUTING·SUBMISSION 수정 | `docs:` |
+| ✨ 예시 코드 추가 | `src/`에 Python 예시 추가 | `feat:` |
+| 🐞 수정 요청 | 잘못된 내용, 깨진 링크, 안 되는 코드 | `fix:` |
+| 🔧 설정 · 구조 작업 | 저장소 설정, 파일 이동·이름 변경 | `chore:` |
+| 💥 충돌 실습 | 의도적 충돌 만들고 해결·기록 | `docs:` |
+| 🛠 트러블슈팅 실습 | amend/reset/revert/stash 실습·기록 | `docs:` |
+
+- 제목 프리픽스는 양식이 자동으로 채워줍니다. 뒤에 내용만 쓰세요 (`docs: 브랜치 포인터 노트 작성`)
 - 이슈 번호를 PR 본문의 `Closes #N`에 넣어야 이슈가 자동으로 닫힙니다
 
 ### PR

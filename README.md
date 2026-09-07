@@ -28,9 +28,7 @@ README.md                       이 문서 (계획 + 규칙 요약)
 SUBMISSION.md                   제출물 링크 모음
 .github/
   pull_request_template.md      PR 쓸 때 자동으로 채워지는 양식
-  ISSUE_TEMPLATE/
-    task.md                     작업 이슈 양식
-    bug.md                      수정 요청 이슈 양식
+  ISSUE_TEMPLATE/               이슈 양식 7종 (종류별)
 docs/
   PROBLEM.md                    미션 원문
   CONTRIBUTING.md               협업 규칙
