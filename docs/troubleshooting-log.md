@@ -4,7 +4,7 @@ Git 되돌리기 4종 실습 기록입니다. 4개 다 해야 하고, **팀원 �
 
 | # | 시나리오 | 담당 | 상태 |
 |---|---|---|---|
-| 1 | `git commit --amend` (최근 커밋 메시지 수정) | 김정현 | ☐ |
+| 1 | `git commit --amend` (최근 커밋 메시지 수정) | 김정현 | O |
 | 2 | `git reset --soft HEAD~1` (로컬 커밋 취소 + 변경 유지) | 김승우 | ☐ |
 | 3 | `git revert` (원격에 push된 커밋 취소) | 대웅 | ☐ |
 | 4 | `git stash` / `git stash pop` (작업 보관하고 브랜치 이동) | 대웅 | ☐ |
@@ -19,32 +19,36 @@ Git 되돌리기 4종 실습 기록입니다. 4개 다 해야 하고, **팀원 �
 김정현 (@kimjexnghyexn) — 실습·기록 / 리뷰: 김대웅
 
 ### 상황
-커밋 메시지를 `update`라고 써버렸다. 아직 push는 안 했다. 팀 커밋 규칙(`<타입>: <무엇을>`)에 안 맞아서 고쳐야 한다.
+notes/git-branch.md를 수정하고 커밋했는데, 커밋 메시지를 "fix"처럼 의미없이 잘못 써서 CONTRIBUTING.md 규칙(대상을 알 수 없는 단어 금지)을 위반한 상황.
+
 
 ### 실행한 명령
 ```bash
-git log --oneline -1
-# <해시> update
+$ git commit -m "fix"
+[docs/kimjexnghyexn-troubleshoot-amend cf5a4ab] fix
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-git commit --amend -m "docs: 브랜치 노트에 HEAD 설명 추가"
+$ git log --oneline -1
+cf5a4ab (HEAD -> docs/kimjexnghyexn-troubleshoot-amend) fix
 
-git log --oneline -1
-# <새 해시> docs: 브랜치 노트에 HEAD 설명 추가
+$ git commit --amend -m "docs: git-branch 노트 줄바꿈 정리"
+[docs/kimjexnghyexn-troubleshoot-amend dcb5a18] docs: git-branch 노트 줄바꿈 정리
+ Date: Tue Sep 8 22:37:19 2026 +0900
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git log --oneline -1
+dcb5a18 (HEAD -> docs/kimjexnghyexn-troubleshoot-amend) docs: git-branch 노트 줄바꿈 정리
 ```
+### 왜 이 방법인가
+아직 push하지 않은 로컬 커밋이라, reset이나 새 커밋을 추가하는 대신 amend로 바로 고쳤다. amend는 커밋 메시지나 직전 커밋 내용을 "새 커밋으로 교체"하는 방식이라, 불필요한 커밋 이력을 남기지 않고 깔끔하게 고칠 수 있다.
 
-<!-- TODO: 실제 출력 붙여넣기 -->
+### 주의할 점
+amend는 커밋 해시를 바꾼다 (cf5a4ab → dcb5a18). 이미 push한 커밋을 amend하면 원격 저장소의 히스토리와 로컬이 어긋나서 force push가 필요해지고, 다른 사람이 그 커밋을 기준으로 작업 중이었다면 충돌이 발생한다. 그래서 **push 전 로컬 커밋에만** 사용해야 한다.
 
 ### 결과
 - 메시지가 바뀌고 **커밋 해시도 바뀜** (커밋을 새로 만드는 거라서)
 - PR/커밋 링크: <링크>
 
-### 왜 이 방법인가
-- 아직 push 안 한 커밋이라 히스토리를 고쳐도 남에게 영향이 없다
-- 이미 push한 커밋에 `amend`를 하면 force push가 필요해서 팀에 문제가 생긴다 → 그때는 새 커밋으로 고친다
-
-### 주의할 점
-- `--amend`는 이전 커밋을 수정하는 게 아니라 **새 커밋으로 교체**하는 것
-- 공유 브랜치에 올라간 커밋에는 쓰지 않는다
 
 ---
 
