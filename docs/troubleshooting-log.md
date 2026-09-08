@@ -47,7 +47,7 @@ amend는 커밋 해시를 바꾼다 (cf5a4ab → dcb5a18). 이미 push한 커밋
 
 ### 결과
 - 메시지가 바뀌고 **커밋 해시도 바뀜** (커밋을 새로 만드는 거라서)
-- PR/커밋 링크: <링크>
+- PR/커밋 링크: https://github.com/Daeung-03/Codyssey-b2-2/pull/new/docs/kimjexnghyexn-troubleshoot-amend
 
 
 ---
