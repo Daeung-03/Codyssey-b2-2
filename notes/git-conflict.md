@@ -14,11 +14,11 @@ Git 충돌은 같은 공통 커밋에서 출발한 변경을 Git이 안전하게
 ### 충돌 마커 읽기
 
 ```txt
-<<<<<<< HEAD
+ <<<<<<< HEAD
 현재 브랜치의 내용
-=======
+ =======
 가져와 병합하는 브랜치의 내용
->>>>>>> docs-theme
+ >>>>>>> docs-theme
 ```
 
 - `<<<<<<< HEAD`부터 `=======` 전까지는 merge를 시작한 현재 브랜치의 내용이다.
@@ -90,11 +90,11 @@ index effddd0,e0d48f3..0000000
 ++=======
 + theme = dark
 ++>>>>>>> docs-theme
-<<<<<<< HEAD
+ <<<<<<< HEAD
 theme = system
-=======
+ =======
 theme = dark
->>>>>>> docs-theme
+ >>>>>>> docs-theme
 ```
 
 이번 실습에서는 `main`의 시스템 설정을 선택했다. 실제 협업이라면 이 선택 전에 상대와 용도를 확인해야 한다. 마커를 지운 뒤 해결 결과를 스테이지하고 merge commit을 만들었다.
@@ -109,10 +109,10 @@ git log --oneline --graph --all
 ```txt
 [main 5e84bf6] docs: 테마 설정 충돌 해결
 *   5e84bf6 docs: 테마 설정 충돌 해결
-|\  
+|\
 | * 57a6ccb docs: 문서용 다크 테마 설정
 * | b690e37 feat: 시스템 테마 설정
-|/  
+|/
 * 4e04079 feat: 기본 테마 설정 추가
 ```
 
