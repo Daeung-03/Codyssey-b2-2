@@ -24,4 +24,5 @@
 | 분류 | 노트 | 담당 | 한 줄 요약 |
 |---|---|---|---|
 | Git | [git-branch](./git-branch.md) | 김정현 | 브랜치는 커밋을 가리키는 포인터일 뿐이다 |
+| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
 <!-- 새 줄은 이 주석 바로 위에 추가하세요 -->
