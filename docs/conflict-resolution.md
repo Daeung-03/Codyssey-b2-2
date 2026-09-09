@@ -8,7 +8,7 @@
 
 | # | 유형 | 파일 | 해결·작성 | 상대 | 예정 | 상태 |
 |---|---|---|---|---|---|---|
-| 1 | 같은 위치 동시 수정 | `notes/README.md` | 김승우 | 김정현 | Day 2 | ☐ |
+| 1 | 같은 위치 동시 수정 | `notes/README.md` | 김승우 | 김정현 | Day 2 | ✅ |
 | 2 | 이름 변경 vs 내용 수정 | `notes/python-functions.md` | 김정현 | 대웅 | Day 3 | ☐ |
 
 ---
@@ -35,7 +35,36 @@
 >>>>>>> origin/main
 ```
 
-<!-- TODO: 실제 git diff 결과 그대로 붙여넣기 -->
+### 실제 발생한 출력
+
+기본 <code>git pull origin main</code>은 이 저장소에 pull 방식이 설정되지 않았다는 안내만 출력하고 병합을 시작하지 않았다. 팀의 merge commit 규칙에 맞게 <code>git pull --no-rebase origin main</code>을 실행해 병합을 시작했고, 다음 충돌이 발생했다.
+
+~~~txt
+Auto-merging notes/README.md
+CONFLICT (content): Merge conflict in notes/README.md
+Automatic merge failed; fix conflicts and then commit the result.
+~~~
+
+<code>git status --short</code>에서 <code>UU notes/README.md</code>를 확인했다. 다른 파일은 <code>main</code>에서 자동 병합된 변경이며, 충돌 파일은 이 목차 하나였다. <code>git diff --no-ext-diff</code>의 실제 출력은 다음과 같다.
+
+~~~txt
+diff --cc notes/README.md
+index 8388659,e0ee701..0000000
+--- a/notes/README.md
++++ b/notes/README.md
+@@@ -25,5 -25,7 +25,11 @@@
+  |---|---|---|---|
+  | Git | [git-branch](./git-branch.md) | 김정현 | 브랜치는 커밋을 가리키는 포인터일 뿐이다 |
+  | Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
+++<<<<<<< HEAD
+ +| GitHub | [github-pr-review](./github-pr-review.md) | 김승우 | PR은 이슈와 변경을 검토한 뒤 main에 병합하는 협업 단위다 |
+++=======
++ | GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
++ | Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
++ | Python | [python-basics](./python-basics.md) | 대웅 | 변수와 타입을 확인하고 조건문과 반복문으로 흐름을 제어한다 |
+++>>>>>>> c59eeb7dd435b69751525605846d9f5581780ea7
+  <!-- 새 줄은 이 주석 바로 위에 추가하세요 -->
+~~~
 
 - `<<<<<<< HEAD` ~ `=======` : 내 브랜치 내용
 - `=======` ~ `>>>>>>> origin/main` : 가져오는 쪽(정현) 내용
@@ -56,12 +85,12 @@ git push origin docs/stevenkim18-pr-review
 ```
 
 ### 결과
-- 목차에 두 노트 다 등록된 상태로 머지
-- PR: <링크>
-- 머지 커밋: <링크>
+- GitHub Flow, PR 리뷰, Python 함수, Python 기초 노트의 목차 행을 모두 보존했다.
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/17
+- 해결은 <code>docs/stevenkim18-pr-review</code> 브랜치에서 수행하고 PR을 갱신했다.
 
 ### 배운 점
-<!-- TODO: 예방책 쓰기. 예) 목차 건드리기 전에 단톡방에 공유한다 -->
+같은 표의 맨 아래에 행을 추가하는 작업은 서로 다른 내용이어도 같은 hunk를 수정하므로 충돌할 수 있다. 새 브랜치를 만들기 전에 최신 <code>main</code>을 반영하고, 충돌이 나면 마커의 양쪽 내용을 확인한 뒤 유효한 행을 모두 남긴다.
 
 ## 충돌 기록 # 1-1 - 같은 위치를 동시에 수정
 
@@ -269,6 +298,92 @@ git commit --no-edit
 
 - PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/10
 - 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/e65ffb5
+
+---
+
+## 추가 충돌 기록 A-1 — PR #8 Git 되돌리기 목차 병합
+
+### 참여자
+- 해결·작성: 김대웅 (@Daeung-03)
+- 상대 변경: `origin/main`의 `git-basics`, `github-flow` 목차 항목
+
+### 상황
+- 내 브랜치: `docs/daeung-03-git-undo`
+- 파일: `notes/README.md`
+- 원인: 내 브랜치와 `main`이 작성 완료 표의 같은 위치에 서로 다른 목차 행을 추가했다.
+
+### 충돌 내용
+
+```txt
+<<<<<<< HEAD
+| Git | [git-undo](./git-undo.md) | 대웅 | 공유 전에는 reset·amend, 공유 후에는 revert로 안전하게 되돌린다 |
+=======
+| Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
+| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
+>>>>>>> origin/main
+```
+
+### 해결 과정
+- 고른 방법: **양쪽 목차 행 모두 유지(keep both)**
+- 이유: 세 행이 서로 다른 노트를 가리키므로 어느 한쪽을 버리면 유효한 노트가 목차에서 누락된다.
+
+```bash
+git fetch origin --prune
+git switch docs/daeung-03-git-undo
+git merge --no-edit origin/main
+# CONFLICT (content): Merge conflict in notes/README.md
+git status --short
+# 마커를 제거하고 main의 두 행과 git-undo 행을 모두 유지
+git add notes/README.md
+git commit --no-edit
+git push origin docs/daeung-03-git-undo
+```
+
+### 결과
+- `git-basics`, `github-flow`, `git-undo` 목차 행을 모두 보존했다.
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/8
+- 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/c0fd9e55a9cba82eb28da3146656973210018167
+
+### 배운 점
+목차처럼 공동 편집 지점이 있는 파일은 작업 전에 최신 `main`을 받고, 충돌 시 상대 변경을 삭제하지 말고 각 항목의 목적을 확인해 병합해야 한다.
+
+---
+
+## 추가 충돌 기록 A-1 후속 — PR #8과 #20 목차 재병합
+
+### 상황
+- 해결·작성: 김대웅 (@Daeung-03)
+- 내 브랜치: `docs/daeung-03-git-undo`
+- 상대 변경: PR #20 머지로 `origin/main`에 추가된 `python-functions` 목차 항목
+- 파일: `notes/README.md`
+- 원인: 첫 충돌을 해결한 뒤 PR #20이 먼저 머지되어 작성 완료 표의 같은 위치가 다시 변경됐다.
+
+### 충돌 내용
+
+```txt
+<<<<<<< HEAD
+| Git | [git-undo](./git-undo.md) | 대웅 | 공유 전에는 reset·amend, 공유 후에는 revert로 안전하게 되돌린다 |
+=======
+| Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
+>>>>>>> origin/main
+```
+
+### 해결 과정과 결과
+- 고른 방법: **양쪽 목차 행 모두 유지(keep both)**
+- 이유: 두 행이 서로 다른 유효한 노트를 가리키므로 모두 목차에 필요하다.
+
+```bash
+git fetch origin --prune
+git merge --no-edit origin/main
+# CONFLICT (content): Merge conflict in notes/README.md
+git status --short
+# 마커를 제거하고 python-functions와 git-undo 행을 모두 유지
+git add notes/README.md
+git commit --no-edit
+```
+
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/8
+- 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/e998777
 
 ---
 
