@@ -301,4 +301,90 @@ git commit --no-edit
 
 ---
 
+## 추가 충돌 기록 A-1 — PR #8 Git 되돌리기 목차 병합
+
+### 참여자
+- 해결·작성: 김대웅 (@Daeung-03)
+- 상대 변경: `origin/main`의 `git-basics`, `github-flow` 목차 항목
+
+### 상황
+- 내 브랜치: `docs/daeung-03-git-undo`
+- 파일: `notes/README.md`
+- 원인: 내 브랜치와 `main`이 작성 완료 표의 같은 위치에 서로 다른 목차 행을 추가했다.
+
+### 충돌 내용
+
+```txt
+<<<<<<< HEAD
+| Git | [git-undo](./git-undo.md) | 대웅 | 공유 전에는 reset·amend, 공유 후에는 revert로 안전하게 되돌린다 |
+=======
+| Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
+| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
+>>>>>>> origin/main
+```
+
+### 해결 과정
+- 고른 방법: **양쪽 목차 행 모두 유지(keep both)**
+- 이유: 세 행이 서로 다른 노트를 가리키므로 어느 한쪽을 버리면 유효한 노트가 목차에서 누락된다.
+
+```bash
+git fetch origin --prune
+git switch docs/daeung-03-git-undo
+git merge --no-edit origin/main
+# CONFLICT (content): Merge conflict in notes/README.md
+git status --short
+# 마커를 제거하고 main의 두 행과 git-undo 행을 모두 유지
+git add notes/README.md
+git commit --no-edit
+git push origin docs/daeung-03-git-undo
+```
+
+### 결과
+- `git-basics`, `github-flow`, `git-undo` 목차 행을 모두 보존했다.
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/8
+- 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/c0fd9e55a9cba82eb28da3146656973210018167
+
+### 배운 점
+목차처럼 공동 편집 지점이 있는 파일은 작업 전에 최신 `main`을 받고, 충돌 시 상대 변경을 삭제하지 말고 각 항목의 목적을 확인해 병합해야 한다.
+
+---
+
+## 추가 충돌 기록 A-1 후속 — PR #8과 #20 목차 재병합
+
+### 상황
+- 해결·작성: 김대웅 (@Daeung-03)
+- 내 브랜치: `docs/daeung-03-git-undo`
+- 상대 변경: PR #20 머지로 `origin/main`에 추가된 `python-functions` 목차 항목
+- 파일: `notes/README.md`
+- 원인: 첫 충돌을 해결한 뒤 PR #20이 먼저 머지되어 작성 완료 표의 같은 위치가 다시 변경됐다.
+
+### 충돌 내용
+
+```txt
+<<<<<<< HEAD
+| Git | [git-undo](./git-undo.md) | 대웅 | 공유 전에는 reset·amend, 공유 후에는 revert로 안전하게 되돌린다 |
+=======
+| Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
+>>>>>>> origin/main
+```
+
+### 해결 과정과 결과
+- 고른 방법: **양쪽 목차 행 모두 유지(keep both)**
+- 이유: 두 행이 서로 다른 유효한 노트를 가리키므로 모두 목차에 필요하다.
+
+```bash
+git fetch origin --prune
+git merge --no-edit origin/main
+# CONFLICT (content): Merge conflict in notes/README.md
+git status --short
+# 마커를 제거하고 python-functions와 git-undo 행을 모두 유지
+git add notes/README.md
+git commit --no-edit
+```
+
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/8
+- 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/e998777
+
+---
+
 <!-- 충돌이 더 생기면 아래에 같은 형식으로 추가 -->

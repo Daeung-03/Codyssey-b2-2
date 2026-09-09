@@ -31,4 +31,5 @@
 | GitHub | [github-pr-review](./github-pr-review.md) | 김승우 | PR은 이슈와 변경을 검토한 뒤 main에 병합하는 협업 단위다 |
 | Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
 | Python | [python-basics](./python-basics.md) | 대웅 | 변수와 타입을 확인하고 조건문과 반복문으로 흐름을 제어한다 |
+| Git | [git-undo](./git-undo.md) | 대웅 | 공유 전에는 reset·amend, 공유 후에는 revert로 안전하게 되돌린다 |
 <!-- 새 줄은 이 주석 바로 위에 추가하세요 -->
