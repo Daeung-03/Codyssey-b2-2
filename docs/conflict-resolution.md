@@ -148,4 +148,51 @@ git push origin docs/kimjexnghyexn-python-functions-fix
 
 ---
 
+## 추가 충돌 기록 A-2 — PR #10 Python 목차 병합
+
+### 참여자
+- 해결·작성: 김대웅 (@Daeung-03)
+- 상대 변경: `origin/main`의 `git-basics`, `github-flow` 목차 항목
+
+### 상황
+- 내 브랜치: `docs/daeung-03-python-basics`
+- 파일: `notes/README.md`
+- 원인: 내 브랜치와 `main`이 작성 완료 표의 같은 위치에 서로 다른 목차 행을 추가했다.
+
+### 충돌 내용
+
+```txt
+<<<<<<< HEAD
+| Python | [python-basics](./python-basics.md) | 대웅 | 변수와 타입을 확인하고 조건문과 반복문으로 흐름을 제어한다 |
+=======
+| Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
+| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
+>>>>>>> origin/main
+```
+
+### 해결 과정
+- 고른 방법: **양쪽 목차 행 모두 유지(keep both)**
+- 이유: 세 행이 서로 다른 노트를 가리키므로 어느 한쪽을 버리면 유효한 노트가 목차에서 누락된다.
+
+```bash
+git fetch origin --prune
+git merge --no-edit origin/main
+# CONFLICT (content): Merge conflict in notes/README.md
+git status --short
+# 마커를 제거하고 main의 두 행과 python-basics 행을 모두 유지
+git add notes/README.md
+git commit --no-edit
+git push origin docs/daeung-03-python-basics
+```
+
+### 결과
+- `git-basics`, `github-flow`, `python-basics` 목차 행을 모두 보존했다.
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/10
+- 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/38a20f59524d60614f57544a3de2d94e5a49cfdb
+
+### 배운 점
+목차처럼 여러 브랜치가 같은 삽입 위치를 수정하는 파일은 병합 전에 최신 `main`을 확인하고, 충돌 시 각 행의 의미를 확인한 뒤 유효한 항목을 모두 보존해야 한다.
+
+---
+
 <!-- 충돌이 더 생기면 아래에 같은 형식으로 추가 -->
