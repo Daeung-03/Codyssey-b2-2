@@ -16,11 +16,23 @@
 - 리뷰 반영한 커밋: <링크>
 
 ### 김정현 (@kimjexnghyexn)
-- Issue: <링크>, <링크>
-- PR: <링크>, <링크>
-- 리뷰한 PR: <링크>, <링크>
-- 리뷰 반영한 커밋: <링크>
-
+- Issue: 
+  - https://github.com/Daeung-03/Codyssey-b2-2/issues/2 (git-branch)
+  - https://github.com/Daeung-03/Codyssey-b2-2/issues/4 (github-flow)
+  - https://github.com/Daeung-03/Codyssey-b2-2/issues/11 (amend)
+  - https://github.com/Daeung-03/Codyssey-b2-2/issues/19 (python-functions)
+  - https://github.com/Daeung-03/Codyssey-b2-2/issues/23 (충돌 #2)
+- PR: 
+  - https://github.com/Daeung-03/Codyssey-b2-2/pull/3 (git-branch)
+  - https://github.com/Daeung-03/Codyssey-b2-2/pull/5 (github-flow)
+  - https://github.com/Daeung-03/Codyssey-b2-2/pull/12 (amend)
+  - https://github.com/Daeung-03/Codyssey-b2-2/pull/20 (python-functions)
+  - https://github.com/Daeung-03/Codyssey-b2-2/pull/24 (충돌 #2)
+- 리뷰한 PR: 
+  - https://github.com/Daeung-03/Codyssey-b2-2/pull/10 (대웅 python-basics)
+  - (https://github.com/Daeung-03/Codyssey-b2-2/pull/6) (대웅 git-basics)
+- 리뷰 반영한 커밋: 
+  - https://github.com/Daeung-03/Codyssey-b2-2/commit/9e99654 (github-flow 충돌 해결 반영)
 ### 김승우 (@stevenkim18)
 - Issue: <링크>, <링크>
 - PR: <링크>, <링크>
