@@ -27,4 +27,5 @@
 | Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
 | GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
 | Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
+| Python | [python-basics](./python-basics.md) | 대웅 | 변수와 타입을 확인하고 조건문과 반복문으로 흐름을 제어한다 |
 <!-- 새 줄은 이 주석 바로 위에 추가하세요 -->
