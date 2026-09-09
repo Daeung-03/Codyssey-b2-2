@@ -235,4 +235,42 @@ git push origin docs/daeung-03-git-undo
 
 ---
 
+## 추가 충돌 기록 A-1 후속 — PR #8과 #20 목차 재병합
+
+### 상황
+- 해결·작성: 김대웅 (@Daeung-03)
+- 내 브랜치: `docs/daeung-03-git-undo`
+- 상대 변경: PR #20 머지로 `origin/main`에 추가된 `python-functions` 목차 항목
+- 파일: `notes/README.md`
+- 원인: 첫 충돌을 해결한 뒤 PR #20이 먼저 머지되어 작성 완료 표의 같은 위치가 다시 변경됐다.
+
+### 충돌 내용
+
+```txt
+<<<<<<< HEAD
+| Git | [git-undo](./git-undo.md) | 대웅 | 공유 전에는 reset·amend, 공유 후에는 revert로 안전하게 되돌린다 |
+=======
+| Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
+>>>>>>> origin/main
+```
+
+### 해결 과정과 결과
+- 고른 방법: **양쪽 목차 행 모두 유지(keep both)**
+- 이유: 두 행이 서로 다른 유효한 노트를 가리키므로 모두 목차에 필요하다.
+
+```bash
+git fetch origin --prune
+git merge --no-edit origin/main
+# CONFLICT (content): Merge conflict in notes/README.md
+git status --short
+# 마커를 제거하고 python-functions와 git-undo 행을 모두 유지
+git add notes/README.md
+git commit --no-edit
+```
+
+- PR: https://github.com/Daeung-03/Codyssey-b2-2/pull/8
+- 해결 커밋: https://github.com/Daeung-03/Codyssey-b2-2/commit/e998777
+
+---
+
 <!-- 충돌이 더 생기면 아래에 같은 형식으로 추가 -->
