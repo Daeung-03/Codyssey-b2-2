@@ -100,6 +100,45 @@ git push origin docs/kimjexnghyexn-github-flow
 
 ### PR 링크
 https://github.com/Daeung-03/Codyssey-b2-2/pull/5
+
+## 충돌 기록 # 1-2 — 같은 위치를 동시에 수정
+
+### 상대
+김정현 (github-flow, 먼저 머지됨) ↔ 김정현 (python-functions, 나중에 충돌 발견)
+
+### 상황
+python-functions 브랜치를 github-flow가 머지되기 전 시점의 main에서 시작해서, notes/README.md의 "작성 완료" 표 맨 아래(주석 바로 위)에 각각 다른 노트 줄을 추가하게 됨. python-functions PR을 올린 뒤 main과 비교하는 과정에서 자동 병합이 안 되는 것을 확인하고, 리뷰 전에 미리 로컬에서 충돌을 해결함.
+
+### 마커 원문
+\`\`\`
+<<<<<<< HEAD
+| Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
+=======
+| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
+>>>>>>> 2781448e0a0cf8e60b5ca13537e16bb957d8b1ff
+\`\`\`
+
+### 실행한 명령
+\`\`\`bash
+git checkout docs/kimjexnghyexn-python-functions
+git pull origin main
+# CONFLICT (content): Merge conflict in notes/README.md
+
+# notes/README.md 직접 열어서 마커 지우고 두 줄 다 남김
+git add notes/README.md
+git commit
+# Merge branch 'main' into docs/kimjexnghyexn-python-functions
+git push origin docs/kimjexnghyexn-python-functions
+\`\`\`
+
+### 어느 쪽을 왜 골랐나
+두 줄 다 유효한 각자의 노트 등록 내용이라 하나도 버리지 않고 둘 다 살렸다. github-flow가 main에 먼저 들어가 있었으므로 그 줄을 위에, python-functions를 아래에 배치했다.
+
+### 주의할 점
+같은 사람(정현)이 여러 브랜치를 동시에 열어두고 작업하면, 먼저 머지된 자기 작업과도 이렇게 충돌할 수 있다는 걸 확인했다. 새 브랜치를 팔 때마다 `git pull origin main`으로 최신 상태를 받은 뒤 시작하면 이런 충돌을 줄일 수 있다.
+
+### PR 링크
+https://github.com/Daeung-03/Codyssey-b2-2/pull/20
 ---
 
 ## 충돌 기록 #2 — 파일 이름 변경 vs 내용 수정
