@@ -16,7 +16,7 @@
 | GitHub | `github-flow.md` | 김정현 | Day 2 |
 | GitHub | `github-pr-review.md` | 김승우 | Day 2 |
 | Python | `python-basics.md` | 대웅 | Day 3 |
-| Python | `python-functions.md` | 김정현 | Day 3 |
+| Python | `python-functions-note.md` | 김정현 | Day 3 |
 | Python | `python-errors.md` | 김승우 | Day 3 |
 
 ## 작성 완료
@@ -28,6 +28,7 @@
 | Python | [python-errors](./python-errors.md) | 김승우 | 예상 가능한 오류를 구체적인 예외 처리로 다룬다 |
 | Git | [git-conflict](./git-conflict.md) | 김승우 | 충돌 마커의 양쪽 변경을 확인하고 합의해 해결한다 |
 | GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
+| Python | [python-functions](./python-functions-note.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
 | GitHub | [github-pr-review](./github-pr-review.md) | 김승우 | PR은 이슈와 변경을 검토한 뒤 main에 병합하는 협업 단위다 |
 | Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
 | Python | [python-basics](./python-basics.md) | 대웅 | 변수와 타입을 확인하고 조건문과 반복문으로 흐름을 제어한다 |
