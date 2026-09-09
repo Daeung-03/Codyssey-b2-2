@@ -25,4 +25,5 @@
 |---|---|---|---|
 | Git | [git-branch](./git-branch.md) | 김정현 | 브랜치는 커밋을 가리키는 포인터일 뿐이다 |
 | Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
+| Python | [python-errors](./python-errors.md) | 김승우 | 예상 가능한 오류를 구체적인 예외 처리로 다룬다 |
 <!-- 새 줄은 이 주석 바로 위에 추가하세요 -->
