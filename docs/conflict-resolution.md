@@ -130,46 +130,6 @@ git push origin docs/kimjexnghyexn-github-flow
 ### PR 링크
 https://github.com/Daeung-03/Codyssey-b2-2/pull/5
 
-## 충돌 기록 # 1-2 — 같은 위치를 동시에 수정
-
-### 상대
-김정현 (github-flow, 먼저 머지됨) ↔ 김정현 (python-functions, 나중에 충돌 발견)
-
-### 상황
-python-functions 브랜치를 github-flow가 머지되기 전 시점의 main에서 시작해서, notes/README.md의 "작성 완료" 표 맨 아래(주석 바로 위)에 각각 다른 노트 줄을 추가하게 됨. python-functions PR을 올린 뒤 main과 비교하는 과정에서 자동 병합이 안 되는 것을 확인하고, 리뷰 전에 미리 로컬에서 충돌을 해결함.
-
-### 마커 원문
-\`\`\`
-<<<<<<< HEAD
-| Python | [python-functions](./python-functions.md) | 김정현 | 함수는 def로 정의하고 return으로 반환하며, type hint는 just 힌트다 |
-=======
-| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
->>>>>>> 2781448e0a0cf8e60b5ca13537e16bb957d8b1ff
-\`\`\`
-
-### 실행한 명령
-\`\`\`bash
-git checkout docs/kimjexnghyexn-python-functions
-git pull origin main
-# CONFLICT (content): Merge conflict in notes/README.md
-
-# notes/README.md 직접 열어서 마커 지우고 두 줄 다 남김
-git add notes/README.md
-git commit
-# Merge branch 'main' into docs/kimjexnghyexn-python-functions
-git push origin docs/kimjexnghyexn-python-functions
-\`\`\`
-
-### 어느 쪽을 왜 골랐나
-두 줄 다 유효한 각자의 노트 등록 내용이라 하나도 버리지 않고 둘 다 살렸다. github-flow가 main에 먼저 들어가 있었으므로 그 줄을 위에, python-functions를 아래에 배치했다.
-
-### 주의할 점
-같은 사람(정현)이 여러 브랜치를 동시에 열어두고 작업하면, 먼저 머지된 자기 작업과도 이렇게 충돌할 수 있다는 걸 확인했다. 새 브랜치를 팔 때마다 `git pull origin main`으로 최신 상태를 받은 뒤 시작하면 이런 충돌을 줄일 수 있다.
-
-### PR 링크
-https://github.com/Daeung-03/Codyssey-b2-2/pull/20
----
-
 ## 충돌 기록 #2 — 파일 이름 변경 vs 내용 수정
 
 ### 참여자
@@ -177,42 +137,39 @@ https://github.com/Daeung-03/Codyssey-b2-2/pull/20
 - 상대: 대웅 (@Daeung-03)
 
 ### 상황
-- 대웅: `notes/python-functions.md` → `notes/python-functions-note.md` 로 이름 변경 후 먼저 머지
-- 김정현: 같은 main에서 시작해서 **옛 이름 파일**의 내용을 수정
-- 결과: `modify/delete` 충돌
+- 대웅: `notes/python-functions.md` → `notes/python-functions-note.md` 로 이름 변경 후 먼저 머지 (PR #22)
+- 김정현: 같은 pre-rename 커밋(c59eeb7)에서 시작해서 **옛 이름 파일**의 내용에 "type hint 심화" 섹션 추가
+- 예상 결과: `modify/delete` 충돌
+- **실제 결과: 충돌 없이 자동 병합됨**
 
-### 충돌 내용
+### 실행한 명령과 출력
+\`\`\`bash
+$ git checkout docs/kimjexnghyexn-python-functions-fix
+$ git pull origin main
+Auto-merging notes/python-functions.md
+# CONFLICT 없이 병합 커밋 메시지 입력 화면으로 바로 넘어감
 
-```txt
-CONFLICT (modify/delete): notes/python-functions.md deleted in origin/main
-and modified in HEAD.
-```
+$ git status
+On branch docs/kimjexnghyexn-python-functions-fix
+nothing to commit, working tree clean
 
-> 이 유형은 **파일 안에 마커가 안 생깁니다.** 한쪽엔 파일이 없고 한쪽은 고쳤다는 사실만 알려주고,
-> 어느 쪽이 맞는지는 사람이 정해야 해서 비자명 충돌입니다.
+$ ls notes/ | grep python-functions
+python-functions-note.md
+\`\`\`
 
-### 해결 과정
-- 고른 방법: **이름 변경 받아들이고, 내 수정 내용을 새 파일로 옮기기**
-- 이유: 파일명 규칙은 이미 팀에서 머지된 결정이니 따라야 하고, 내가 쓴 내용도 없어지면 안 된다
+`notes/python-functions.md`(옛 이름)는 사라졌고, `notes/python-functions-note.md`(새 이름) 안에 내가 추가한 "type hint 심화" 섹션이 그대로 들어가 있는 것을 확인했다.
 
-```bash
-git pull origin main
-git status                  # deleted by them: notes/python-functions.md
-# 내가 쓴 내용을 notes/python-functions-note.md 에 옮겨 붙이기
-git rm notes/python-functions.md
-git add notes/python-functions-note.md
-git commit
-git push origin docs/kimjexnghyexn-python-functions-fix
-```
+### 왜 충돌이 안 났는가
+Git의 merge는 파일 삭제 + 새 파일 추가가 동시에 일어나면, 두 파일의 내용 유사도를 비교해서 "이건 이름만 바뀐 것(rename)"인지 자동으로 판단한다 (rename detection). 대웅의 rename 커밋은 내용을 전혀 바꾸지 않았기 때문에 유사도가 100%였고, Git은 이를 rename으로 인식했다. 그 다음 내가 옛 이름 파일에 추가한 내용(작은 텍스트 블록)을 새 이름 파일에 그대로 적용할 수 있었기 때문에(패치가 깨끗하게 들어맞았기 때문에), 사람이 개입할 필요 없이 자동으로 병합이 완료됐다.
 
-### 결과
-- 파일명 규칙과 내 수정 내용이 둘 다 살아남음
-- PR: <링크>
-- 머지 커밋: <링크>
+즉 "한쪽은 이름 변경, 한쪽은 내용 수정"이 항상 충돌로 이어지는 건 아니며, 변경 내용이 작고 명확할수록 Git이 알아서 처리해줄 가능성이 높다는 것을 직접 확인했다.
 
-### 배운 점
-<!-- TODO: 예) 파일 이름 바꾸는 PR은 남이 그 파일 작업 중일 때 올리지 않는다.
-     마커가 안 생겨서 조용히 작업이 사라질 수 있으니 git status를 꼭 읽는다 -->
+### 만약 진짜 충돌을 내고 싶다면
+- 수정량을 rename 유사도 기준(기본 50%) 아래로 크게 만들거나
+- `git merge -X no-renames` 또는 `git config diff.renames false`로 rename 탐지 자체를 꺼서 강제로 delete/modify 충돌을 유도할 수 있다.
+
+### 주의할 점
+자동 병합이 항상 "의도대로" 되는 건 아니므로, rename이 걸린 파일을 다룰 때는 병합 후 반드시 내용을 직접 열어서 검증해야 한다. 이번엔 내용이 올바르게 들어갔지만, 더 복잡한 수정이었다면 자동 병합 결과가 의도와 다를 수 있다.
 
 ---
 
