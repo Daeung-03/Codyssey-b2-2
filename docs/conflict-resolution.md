@@ -63,6 +63,43 @@ git push origin docs/stevenkim18-pr-review
 ### 배운 점
 <!-- TODO: 예방책 쓰기. 예) 목차 건드리기 전에 단톡방에 공유한다 -->
 
+## 충돌 기록 # 1-1 - 같은 위치를 동시에 수정
+
+### 상대
+김정현 (docs/kimjexnghyexn-github-flow) ↔ 대웅 (git-basics, 먼저 머지됨)
+
+### 상황
+notes/README.md의 "작성 완료" 표 맨 아래(주석 바로 위)에, 정현은 github-flow 노트를 등록하려 하고, 대웅은 git-basics 노트를 등록하려 하면서 같은 위치에 줄을 추가함. 대웅 쪽이 먼저 main에 머지되어 있는 상태에서 정현이 `git pull origin main`을 실행하며 충돌 발생.
+
+### 마커 원문
+\`\`\`
+| Git | [git-branch](./git-branch.md) | 김정현 | 브랜치는 커밋을 가리키는 포인터일 뿐이다 |
+<<<<<<< HEAD
+| GitHub | [github-flow](./github-flow.md) | 김정현 | GitHub Flow는 main과 작업 브랜치만 쓰는 단순한 협업 전략이다 |
+=======
+| Git | [git-basics](./git-basics.md) | 대웅 | add로 고른 변경을 commit으로 저장소에 기록한다 |
+>>>>>>> 8abaf7b8decf46b1c56f31ac8dd32bd50fd46b44
+\`\`\`
+
+### 실행한 명령
+\`\`\`bash
+git checkout docs/kimjexnghyexn-github-flow
+git config pull.rebase false
+git pull origin main
+# CONFLICT (content): Merge conflict in notes/README.md
+
+# notes/README.md 직접 열어서 마커 지우고 두 줄 다 남김
+git add notes/README.md
+git commit
+# 9e99654 Merge branch 'main' ... into docs/kimjexnghyexn-github-flow
+git push origin docs/kimjexnghyexn-github-flow
+\`\`\`
+
+### 어느 쪽을 왜 골랐나
+양쪽 다 유효한 작업(서로 다른 노트를 등록하는 것)이라 한쪽을 버리지 않고 두 줄 다 살렸다. 표 안에서 분류(Git/GitHub)별로 묶이도록 git-basics를 먼저, github-flow를 뒤에 배치했다.
+
+### PR 링크
+https://github.com/Daeung-03/Codyssey-b2-2/pull/5
 ---
 
 ## 충돌 기록 #2 — 파일 이름 변경 vs 내용 수정
